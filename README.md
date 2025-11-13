@@ -1,2 +1,3 @@
-# config
-# config
+#Intro 
+
+My nvim config files. 
