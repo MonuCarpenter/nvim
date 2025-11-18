@@ -36,7 +36,10 @@ return {
 					single_file_support = false,
 					settings = {
 						typescript = {
-							inlayHints = {
+							format = {
+								semicolons = "remove"
+							},
+							inlayHints = { 
 								includeInlayParameterNameHints = "literal",
 								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
 								includeInlayFunctionParameterTypeHints = true,
@@ -47,6 +50,9 @@ return {
 							},
 						},
 						javascript = {
+							format = {
+								semicolons = "remove"
+							},
 							inlayHints = {
 								includeInlayParameterNameHints = "all",
 								includeInlayParameterNameHintsWhenArgumentMatchesName = false,

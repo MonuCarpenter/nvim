@@ -1,4 +1,4 @@
-return {
+ return {
 	{
 		"craftzdog/solarized-osaka.nvim",
 		lazy = true,
@@ -8,5 +8,10 @@ return {
 				transparent = true,
 			}
 		end,
+	},
+	{
+		"lunacookies/vim-colors-xcode",
+		lazy = true,
+		priority = 1000,
 	},
 }
