@@ -53,6 +53,18 @@ vim.filetype.add({
 	},
 })
 
+-- Set cursor color to orange after colorscheme loads
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.cmd("hi Cursor guifg=#000000 guibg=#ff8c00")
+    vim.cmd("hi CursorIM guifg=#000000 guibg=#ff8c00")
+  end,
+})
+
+-- Also set immediately
+vim.cmd("hi Cursor guifg=#000000 guibg=#ff8c00")
+vim.cmd("hi CursorIM guifg=#000000 guibg=#ff8c00")
+
 vim.g.lazyvim_prettier_needs_config = true
 vim.g.lazyvim_picker = "telescope"
 vim.g.lazyvim_cmp = "blink.cmp"
