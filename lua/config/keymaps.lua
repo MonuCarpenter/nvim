@@ -71,3 +71,8 @@ end)
 keymap.set("n", "<leader>t", ":vsplit | terminal<Return>", opts)
 keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", opts)
 keymap.set("n", "<leader>T", ":q<Return>", opts)
+
+-- Copilot keybindings
+keymap.set("i", "<C-l>", 'copilot#Accept("<CR>")', { expr = true, replace_keycodes = false })
+keymap.set("i", "<C-]>", "<Plug>(copilot-next)")
+keymap.set("i", "<C-[>", "<Plug>(copilot-previous)")

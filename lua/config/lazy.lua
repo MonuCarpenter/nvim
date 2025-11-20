@@ -33,6 +33,8 @@ require("lazy").setup({
 		-- { import = "lazyvim.plugins.extras.lang.markdown" },
 		{ import = "lazyvim.plugins.extras.lang.rust" },
 		{ import = "lazyvim.plugins.extras.lang.tailwind" },
+		-- React Native/Expo extras
+		{ import = "lazyvim.plugins.extras.lang.json" }, -- Already added, good for package.json
 		-- { import = "lazyvim.plugins.extras.dap.core" },
 		-- { import = "lazyvim.plugins.extras.vscode" },
 		{ import = "lazyvim.plugins.extras.util.mini-hipatterns" },

@@ -77,6 +77,13 @@ return {
 		end,
 	},
 	{
+		"fang2hou/blink-copilot",
+		opts = {
+			max_completions = 3,
+			max_attempts = 3,
+		},
+	},
+	{
 		"olimorris/codecompanion.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",

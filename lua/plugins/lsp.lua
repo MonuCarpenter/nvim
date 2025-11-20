@@ -12,6 +12,10 @@ return {
 				"tailwindcss-language-server",
 				"typescript-language-server",
 				"css-lsp",
+				"rust-analyzer",
+				-- React Native/Expo tools
+				"emmet-ls", -- HTML/CSS completion
+				"json-lsp", -- JSON support
 			})
 		end,
 	},
@@ -39,7 +43,7 @@ return {
 							format = {
 								semicolons = "remove"
 							},
-							inlayHints = { 
+							inlayHints = {
 								includeInlayParameterNameHints = "literal",
 								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
 								includeInlayFunctionParameterTypeHints = true,
@@ -47,6 +51,12 @@ return {
 								includeInlayPropertyDeclarationTypeHints = true,
 								includeInlayFunctionLikeReturnTypeHints = true,
 								includeInlayEnumMemberValueHints = true,
+							},
+							suggest = {
+								includeCompletionsForImportStatements = true,
+								includeCompletionsForModuleExports = true,
+								includeAutomaticOptionalChainCompletions = true,
+								includeCompletionsWithSnippetText = true,
 							},
 						},
 						javascript = {
@@ -62,10 +72,22 @@ return {
 								includeInlayFunctionLikeReturnTypeHints = true,
 								includeInlayEnumMemberValueHints = true,
 							},
+							suggest = {
+								includeCompletionsForImportStatements = true,
+								includeCompletionsForModuleExports = true,
+								includeAutomaticOptionalChainCompletions = true,
+								includeCompletionsWithSnippetText = true,
+							},
+						},
+						completions = {
+							completeFunctionCalls = true,
 						},
 					},
 				},
 				html = {},
+				emmet_ls = {
+					filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+				},
 				yamlls = {
 					settings = {
 						yaml = {
@@ -134,6 +156,27 @@ return {
 									indent_size = "2",
 									continuation_indent_size = "2",
 								},
+							},
+						},
+					},
+				},
+				rust_analyzer = {
+					settings = {
+						["rust-analyzer"] = {
+							cargo = {
+								allFeatures = true,
+							},
+							checkOnSave = {
+								command = "clippy",
+							},
+							diagnostics = {
+								enable = true,
+							},
+							inlayHints = {
+								enable = true,
+								showParameterNames = true,
+								parameterHintsPrefix = "<- ",
+								otherHintsPrefix = "=> ",
 							},
 						},
 					},

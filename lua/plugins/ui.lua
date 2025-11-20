@@ -172,4 +172,26 @@ return {
 			},
 		},
 	},
+
+	-- Smooth cursor animations - Simple and Clean
+	{
+		"sphamba/smear-cursor.nvim",
+		opts = {
+			-- Cursor color
+			cursor_color = "#d3cdc3",
+			-- Background color when cursor jumps
+			normal_bg = "#282828",
+			-- Basic smear settings
+			smear_between_buffers = true,
+			smear_between_neighbor_lines = true,
+			scroll_buffer_space = true,
+			smear_insert_mode = true,
+			-- Smooth animation settings
+			stiffness = 0.6,
+			trailing_stiffness = 0.3,
+			distance_stop_animating = 0.1,
+			-- Set to `true` if your font supports legacy computing symbols
+			legacy_computing_symbols_support = false,
+		},
+	},
 }
