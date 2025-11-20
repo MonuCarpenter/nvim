@@ -67,7 +67,12 @@ keymap.set("n", "<leader>r", function()
 	require("craftzdog.hsl").replaceHexWithHSL()
 end)
 
--- Terminal
-keymap.set("n", "<leader>t", ":vsplit | terminal<Return>", opts)
-keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", opts)
-keymap.set("n", "<leader>T", ":q<Return>", opts)
+keymap.set("n", "<leader>i", function()
+	require("craftzdog.lsp").toggleInlayHints()
+end)
+
+vim.api.nvim_create_user_command("ToggleAutoformat", function()
+	require("craftzdog.lsp").toggleAutoformat()
+end, {})
+keymap.set("n", "<leader>t", ":terminal<Return>", opts)
+keymap.set("t", "<Esc><Esc>", "<C-\><C-n>", opts)
