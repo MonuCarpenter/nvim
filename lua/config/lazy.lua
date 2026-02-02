@@ -13,58 +13,47 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    {
-      "wfxr/minimap.vim",
-      build = "cargo install --locked code-minimap",
-      config = function()
-        vim.cmd("let g:minimap_width = 10")
-        vim.cmd("let g:minimap_auto_start = 1")
-        vim.cmd("let g:minimap_auto_start_win_enter = 1")
-      end,
-    },
+     {
+       "wfxr/minimap.vim",
+       build = "cargo install --locked code-minimap",
+       config = function()
+         vim.cmd("let g:minimap_width = 10")
+         vim.cmd("let g:minimap_auto_start = 1")
+         vim.cmd("let g:minimap_auto_start_win_enter = 1")
+         vim.cmd("let g:minimap_filetypes = ['tsx', 'typescript', 'typescriptreact']")
+       end,
+     },
 
 		-- add LazyVim and import its plugins
 		{
 			"LazyVim/LazyVim",
 			import = "lazyvim.plugins",
 			opts = {
-				colorscheme = "xcodelighthc",
+				colorscheme = "xcodedarkhc",
 				news = {
 					lazyvim = true,
 					neovim = true,
 				},
 			},
 		},
-		-- import any extras modules here
-		{ import = "lazyvim.plugins.extras.linting.eslint" },
-		{ import = "lazyvim.plugins.extras.formatting.prettier" },
-		{ import = "lazyvim.plugins.extras.lang.typescript" },
-		{ import = "lazyvim.plugins.extras.lang.json" },
-		-- { import = "lazyvim.plugins.extras.lang.markdown" },
-		-- { import = "lazyvim.plugins.extras.lang.rust" }, -- Disabled to avoid conflict with manual rust-analyzer config
-		{ import = "lazyvim.plugins.extras.lang.tailwind" },
-		-- React Native/Expo extras
-		{ import = "lazyvim.plugins.extras.lang.json" }, -- Already added, good for package.json
-		-- { import = "lazyvim.plugins.extras.dap.core" },
-		-- { import = "lazyvim.plugins.extras.vscode" },
-		{ import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-		-- { import = "lazyvim.plugins.extras.test.core" },
-		-- { import = "lazyvim.plugins.extras.coding.yanky" },
-		-- { import = "lazyvim.plugins.extras.editor.mini-files" },
-		-- { import = "lazyvim.plugins.extras.util.project" },
-		{ import = "plugins" },
-    {
-      "nvim-treesitter/nvim-treesitter",
-      build = ":TSUpdate",
-      config = function()
-        require("nvim-treesitter.configs").setup({
-          ensure_installed = "all", -- Install all parsers available
-          highlight = {
-            enable = true, -- Enable TreeSitter highlighting
-          },
-        })
-      end,
-    },
+ 		-- import any extras modules here
+ 		{ import = "lazyvim.plugins.extras.linting.eslint" },
+ 		{ import = "lazyvim.plugins.extras.formatting.prettier" },
+ 		{ import = "lazyvim.plugins.extras.lang.typescript" },
+ 		{ import = "lazyvim.plugins.extras.lang.json" },
+ 		-- { import = "lazyvim.plugins.extras.lang.markdown" },
+ 		-- { import = "lazyvim.plugins.extras.lang.rust" }, -- Disabled to avoid conflict with manual rust-analyzer config
+ 		{ import = "lazyvim.plugins.extras.lang.tailwind" },
+ 		-- React Native/Expo extras
+ 		{ import = "lazyvim.plugins.extras.lang.json" }, -- Already added, good for package.json
+ 		-- { import = "lazyvim.plugins.extras.dap.core" },
+ 		-- { import = "lazyvim.plugins.extras.vscode" },
+ 		{ import = "lazyvim.plugins.extras.util.mini-hipatterns" },
+ 		-- { import = "lazyvim.plugins.extras.test.core" },
+ 		-- { import = "lazyvim.plugins.extras.coding.yanky" },
+ 		-- { import = "lazyvim.plugins.extras.editor.mini-files" },
+ 		-- { import = "lazyvim.plugins.extras.util.project" },
+ 		{ import = "plugins" },
 
 	},
 	defaults = {
@@ -100,13 +89,12 @@ require("lazy").setup({
 			},
 		},
 	},
-	ui = {
-		custom_keys = {
-			["<localleader>d"] = function(plugin)
-				dd(plugin)
-        vim.cmd("let g:minimap_filetypes = ['tsx', 'typescript', 'typescriptreact']")
-      end,
-		},
-	},
+  ui = {
+  	custom_keys = {
+  		["<localleader>d"] = function(plugin)
+  			dd(plugin)
+  		end,
+  	},
+  },
 	debug = false,
 })

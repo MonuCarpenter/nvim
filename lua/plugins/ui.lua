@@ -93,37 +93,29 @@ return {
 		},
 	},
 
-	-- filename
-	{
-		"b0o/incline.nvim",
-		dependencies = { "craftzdog/solarized-osaka.nvim" },
-		event = "BufReadPre",
-		priority = 1200,
-		config = function()
-			local colors = require("solarized-osaka.colors").setup()
-			require("incline").setup({
-				highlight = {
-					groups = {
-						InclineNormal = { guibg = colors.magenta500, guifg = colors.base04 },
-						InclineNormalNC = { guifg = colors.violet500, guibg = colors.base03 },
-					},
-				},
-				window = { margin = { vertical = 0, horizontal = 1 } },
-				hide = {
-					cursorline = true,
-				},
-				render = function(props)
-					local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-					if vim.bo[props.buf].modified then
-						filename = "[+] " .. filename
-					end
+  -- filename
+  {
+    "b0o/incline.nvim",
+    event = "BufReadPre",
+    priority = 1200,
+    config = function()
+      require("incline").setup({
+        window = { margin = { vertical = 0, horizontal = 1 } },
+        hide = {
+          cursorline = true,
+        },
+        render = function(props)
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+          if vim.bo[props.buf].modified then
+            filename = "[+] " .. filename
+          end
 
-					local icon, color = require("nvim-web-devicons").get_icon_color(filename)
-					return { { icon, guifg = color }, { " " }, { filename } }
-				end,
-			})
-		end,
-	},
+          local icon, color = require("nvim-web-devicons").get_icon_color(filename)
+          return { { icon, guifg = color }, { " " }, { filename } }
+        end,
+      })
+    end,
+  },
 
 	-- statusline
 	{
@@ -180,25 +172,75 @@ return {
 		},
 	},
 
-	-- Smooth cursor animations - Simple and Clean
-	{
-		"sphamba/smear-cursor.nvim",
-		opts = {
-			-- Cursor color
-			cursor_color = "#d3cdc3",
-			-- Background color when cursor jumps
-			normal_bg = "#282828",
-			-- Basic smear settings
-			smear_between_buffers = true,
-			smear_between_neighbor_lines = true,
-			scroll_buffer_space = true,
-			smear_insert_mode = true,
-			-- Smooth animation settings
-			stiffness = 0.6,
-			trailing_stiffness = 0.3,
-			distance_stop_animating = 0.1,
-			-- Set to `true` if your font supports legacy computing symbols
-			legacy_computing_symbols_support = false,
-		},
-	},
+  -- Smooth cursor animations - Simple and Clean
+  {
+    "sphamba/smear-cursor.nvim",
+    opts = {
+      -- Cursor color
+      cursor_color = "#c0caf5", -- Light blue for dark theme
+      -- Background color when cursor jumps
+      normal_bg = "#1a1b26", -- Dark background
+      -- Basic smear settings
+      smear_between_buffers = true,
+      smear_between_neighbor_lines = true,
+      scroll_buffer_space = true,
+      smear_insert_mode = true,
+      -- Smooth animation settings
+      stiffness = 0.6,
+      trailing_stiffness = 0.3,
+      distance_stop_animating = 0.1,
+      -- Set to `true` if your font supports legacy computing symbols
+      legacy_computing_symbols_support = false,
+    },
+  },
+
+  -- Todo comments
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
+
+  -- Trouble for diagnostics
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
+  },
 }
