@@ -76,3 +76,103 @@ keymap.set("n", "<leader>T", ":q<Return>", opts)
 keymap.set("i", "<C-l>", 'copilot#Accept("<CR>")', { expr = true, replace_keycodes = false })
 keymap.set("i", "<C-]>", "<Plug>(copilot-next)")
 keymap.set("i", "<C-[>", "<Plug>(copilot-previous)")
+
+-- Function to start rust-analyzer
+function _G.start_rust_analyzer()
+	local clients = vim.lsp.get_clients({ name = "rust_analyzer" })
+	if #clients > 0 then
+		vim.notify("rust-analyzer is already running", vim.log.levels.INFO)
+		return
+	end
+
+	require("lspconfig").rust_analyzer.setup({
+		settings = {
+			["rust-analyzer"] = {
+				cargo = { allFeatures = true },
+				checkOnSave = { command = "clippy" },
+				diagnostics = { enable = true },
+				inlayHints = {
+					enable = true,
+					showParameterNames = true,
+					parameterHintsPrefix = "<- ",
+					otherHintsPrefix = "=> "
+				}
+			}
+		}
+	})
+	local success = vim.lsp.start(require("lspconfig").rust_analyzer)
+	if success then
+		vim.notify("rust-analyzer started successfully", vim.log.levels.INFO)
+	else
+		vim.notify("Failed to start rust-analyzer", vim.log.levels.ERROR)
+	end
+end
+
+-- Function to start clangd (C++)
+function _G.start_clangd()
+	local clients = vim.lsp.get_clients({ name = "clangd" })
+	if #clients > 0 then
+		vim.notify("clangd is already running", vim.log.levels.INFO)
+		return
+	end
+
+	require("lspconfig").clangd.setup({
+		cmd = {
+			"clangd",
+			"--background-index",
+			"--clang-tidy",
+			"--header-insertion=iwyu",
+			"--completion-style=detailed",
+			"--function-arg-placeholders",
+			"--fallback-style=llvm",
+		},
+		init_options = {
+			usePlaceholders = true,
+			completeUnimported = true,
+			clangdFileStatus = true,
+		},
+	})
+	local success = vim.lsp.start(require("lspconfig").clangd)
+	if success then
+		vim.notify("clangd started successfully", vim.log.levels.INFO)
+	else
+		vim.notify("Failed to start clangd", vim.log.levels.ERROR)
+	end
+end
+
+-- Function to start gopls (Go)
+function _G.start_gopls()
+	local clients = vim.lsp.get_clients({ name = "gopls" })
+	if #clients > 0 then
+		vim.notify("gopls is already running", vim.log.levels.INFO)
+		return
+	end
+
+	require("lspconfig").gopls.setup({
+		settings = {
+			gopls = {
+				analyses = {
+					unusedparams = true,
+					shadow = true,
+				},
+				staticcheck = true,
+				gofumpt = true,
+				usePlaceholders = true,
+				completeUnimported = true,
+				symbolMatcher = "fuzzy",
+				experimentalPostfixCompletions = true,
+			},
+		},
+	})
+	local success = vim.lsp.start(require("lspconfig").gopls)
+	if success then
+		vim.notify("gopls started successfully", vim.log.levels.INFO)
+	else
+		vim.notify("Failed to start gopls", vim.log.levels.ERROR)
+	end
+end
+
+-- LSP keybindings
+keymap.set("n", "<leader>rs", start_rust_analyzer, { desc = "Start rust-analyzer LSP" })
+keymap.set("n", "<leader>cc", _G.start_clangd, { desc = "Start clangd LSP (C++)" })
+keymap.set("n", "<leader>go", _G.start_gopls, { desc = "Start gopls LSP (Go)" })

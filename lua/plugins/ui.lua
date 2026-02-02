@@ -10,6 +10,13 @@ return {
 				},
 				opts = { skip = true },
 			})
+			table.insert(opts.routes, {
+				filter = {
+					event = "notify",
+					kind = "error",
+				},
+				opts = { skip = true },
+			})
 			local focused = true
 			vim.api.nvim_create_autocmd("FocusGained", {
 				callback = function()

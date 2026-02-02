@@ -1,0 +1,12 @@
+// Highlight comments
+comment = /\/\/.*
+block_comment = /\/\*[\s\S]*?\*\//
+
+// Highlight strings
+string = /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/
+
+// Highlight keywords
+keyword = /\b(?:async|await|if|else|function|class|constructor|extends|let|const|export|import|return)\b/
+
+// Highlight punctuations
+punctuation = /[{}()[\].,;]/

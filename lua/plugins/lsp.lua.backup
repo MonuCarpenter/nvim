@@ -13,21 +13,11 @@ return {
 				"typescript-language-server",
 				"css-lsp",
 				"rust-analyzer",
-				"clangd", -- C++ LSP
-				"gopls", -- Go LSP
 				-- React Native/Expo tools
 				"emmet-ls", -- HTML/CSS completion
 				"json-lsp", -- JSON support
 			})
 		end,
-	},
-
-	-- mason-lspconfig
-	{
-		"mason-org/mason-lspconfig.nvim",
-		opts = {
-			ensure_installed = { "rust_analyzer" },
-		},
 	},
 
 	-- lsp servers
@@ -170,63 +160,12 @@ return {
 						},
 					},
 				},
-				rust_analyzer = {
-					settings = {
-						["rust-analyzer"] = {
-							cargo = {
-								allFeatures = true,
-							},
-							checkOnSave = {
-								command = "clippy",
-							},
-							diagnostics = {
-								enable = true,
-							},
-							inlayHints = {
-								enable = true,
-								showParameterNames = true,
-								parameterHintsPrefix = "<- ",
-								otherHintsPrefix = "=> ",
-							},
-						},
-					},
-				},
-				clangd = {
-					cmd = {
-						"clangd",
-						"--background-index",
-						"--clang-tidy",
-						"--header-insertion=iwyu",
-						"--completion-style=detailed",
-						"--function-arg-placeholders",
-						"--fallback-style=llvm",
-					},
-					init_options = {
-						usePlaceholders = true,
-						completeUnimported = true,
-						clangdFileStatus = true,
-					},
-				},
-				gopls = {
-					settings = {
-						gopls = {
-							analyses = {
-								unusedparams = true,
-								shadow = true,
-							},
-							staticcheck = true,
-							gofumpt = true,
-							usePlaceholders = true,
-							completeUnimported = true,
-							symbolMatcher = "fuzzy",
-							experimentalPostfixCompletions = true,
-						},
-					},
-				},
+
 			},
 			setup = {},
 		},
 	},
+
 
 	{
 		"neovim/nvim-lspconfig",

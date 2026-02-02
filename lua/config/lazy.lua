@@ -12,7 +12,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	spec = {
+  spec = {
+    {
+      "wfxr/minimap.vim",
+      build = "cargo install --locked code-minimap",
+      config = function()
+        vim.cmd("let g:minimap_width = 10")
+        vim.cmd("let g:minimap_auto_start = 1")
+        vim.cmd("let g:minimap_auto_start_win_enter = 1")
+      end,
+    },
+
 		-- add LazyVim and import its plugins
 		{
 			"LazyVim/LazyVim",
@@ -31,7 +41,7 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.typescript" },
 		{ import = "lazyvim.plugins.extras.lang.json" },
 		-- { import = "lazyvim.plugins.extras.lang.markdown" },
-		{ import = "lazyvim.plugins.extras.lang.rust" },
+		-- { import = "lazyvim.plugins.extras.lang.rust" }, -- Disabled to avoid conflict with manual rust-analyzer config
 		{ import = "lazyvim.plugins.extras.lang.tailwind" },
 		-- React Native/Expo extras
 		{ import = "lazyvim.plugins.extras.lang.json" }, -- Already added, good for package.json
@@ -43,6 +53,19 @@ require("lazy").setup({
 		-- { import = "lazyvim.plugins.extras.editor.mini-files" },
 		-- { import = "lazyvim.plugins.extras.util.project" },
 		{ import = "plugins" },
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
+      config = function()
+        require("nvim-treesitter.configs").setup({
+          ensure_installed = "all", -- Install all parsers available
+          highlight = {
+            enable = true, -- Enable TreeSitter highlighting
+          },
+        })
+      end,
+    },
+
 	},
 	defaults = {
 		-- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -81,7 +104,8 @@ require("lazy").setup({
 		custom_keys = {
 			["<localleader>d"] = function(plugin)
 				dd(plugin)
-			end,
+        vim.cmd("let g:minimap_filetypes = ['tsx', 'typescript', 'typescriptreact']")
+      end,
 		},
 	},
 	debug = false,
