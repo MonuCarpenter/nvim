@@ -13,3 +13,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Open images with snacks
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = {"*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif"},
+	callback = function()
+		require("snacks").image.open()
+	end,
+})

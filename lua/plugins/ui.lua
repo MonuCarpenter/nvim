@@ -71,29 +71,39 @@ return {
 		"snacks.nvim",
 		opts = {
 			scroll = { enabled = false },
+			dashboard = {
+				preset = {
+					header = [[
+ ███╗░░░███╗░█████╗░███╗░░██╗██╗░░░██╗
+ ████╗░████║██╔══██╗████╗░██║██║░░░██║
+ ██╔████╔██║██║░░██║██╔██╗██║██║░░░██║
+ ██║╚██╔╝██║██║░░██║██║╚████║██║░░░██║
+ ██║░╚═╝░██║╚█████╔╝██║░╚███║╚██████╔╝
+ ╚═╝░░░░░╚═╝░╚════╝░╚═╝░░╚══╝░╚═════╝░
+]],
+				},
+			},
+			image = {
+				bo = { modified = false },
+			},
+			picker = {
+				previewers = {
+					image = {},
+				},
+			},
+			explorer = {
+				config = function(opts, defaults)
+					vim.api.nvim_set_hl(0, "SnacksExplorer", { bg = "#3c3c3c" })
+					opts.win = opts.win or {}
+					opts.win.wo = opts.win.wo or {}
+					opts.win.wo.winhighlight = "Normal:SnacksExplorer"
+				end,
+			},
 		},
 		keys = {},
 	},
 
 	-- buffer line
-	{
-		"akinsho/bufferline.nvim",
-		event = "VeryLazy",
-		keys = {
-			{ "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
-			{ "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
-		},
-		opts = {
-			options = {
-				mode = "tabs",
-				-- separator_style = "slant",
-				show_buffer_close_icons = false,
-				show_close_icon = false,
-			},
-		},
-	},
-
-  -- filename
   {
     "b0o/incline.nvim",
     event = "BufReadPre",
@@ -153,25 +163,6 @@ return {
 		"MeanderingProgrammer/render-markdown.nvim",
 		enabled = false,
 	},
-
-  {
-    "snacks.nvim",
-    opts = {
-      dashboard = {
-        preset = {
-          header = [[
-███╗░░░███╗░█████╗░███╗░░██╗██╗░░░██╗
-████╗░████║██╔══██╗████╗░██║██║░░░██║
-██╔████╔██║██║░░██║██╔██╗██║██║░░░██║
-██║╚██╔╝██║██║░░██║██║╚████║██║░░░██║
-██║░╚═╝░██║╚█████╔╝██║░╚███║╚██████╔╝
-╚═╝░░░░░╚═╝░╚════╝░╚═╝░░╚══╝░╚═════╝░
-]],
-        },
-      },
-    },
-    keys = {},
-  },
 
   -- Smooth cursor animations - Simple and Clean
   {
