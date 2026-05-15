@@ -44,6 +44,11 @@ return {
 					end,
 				},
 				tsserver = {
+				-- Increase Node memory for tsserver to avoid OOM crashes
+				on_new_config = function(new_config)
+					new_config.cmd_env = new_config.cmd_env or {}
+					new_config.cmd_env.NODE_OPTIONS = '--max-old-space-size=8192'
+				end,
 					root_dir = function(...)
 						return require("lspconfig.util").root_pattern(".git")(...)
 					end,
