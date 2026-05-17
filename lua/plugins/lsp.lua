@@ -196,9 +196,9 @@ return {
 						},
 					},
 				},
-				clangd = {
+        clangd = {
 					cmd = {
-						"clangd",
+						vim.fn.expand("~/.local/share/nvim/mason/bin/clangd"),
 						"--background-index",
 						"--clang-tidy",
 						"--header-insertion=iwyu",

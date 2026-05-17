@@ -1,14 +1,37 @@
 return {
   "karb94/neoscroll.nvim",
   event = "BufReadPre",
-  opts = {
-    -- Enable all typical scroll keys
-    mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
-    hide_cursor = true,        -- Hide cursor while scrolling
-    stop_eof = true,           -- Stop at <EOF> when scrolling downwards
-    respect_scrolloff = true,  -- Respect your scrolloff setting
-    cursor_scrolls_alone = true,
-    easing = 'quadratic',      -- Smoother easing
-    performance_mode = false,  -- Set true for very large files if perf is bad
-  },
+  config = function()
+    local neoscroll = require("neoscroll")
+    neoscroll.setup({
+      hide_cursor = true,
+      stop_eof = true,
+      respect_scrolloff = true,
+      cursor_scrolls_alone = true,
+      performance_mode = false,
+      mappings = {},
+    })
+
+    local map = function(keys, fn)
+      vim.keymap.set({ "n", "x", "v" }, keys, fn, { silent = true, noremap = true })
+    end
+
+    map("<C-u>", function() neoscroll.ctrl_u({ duration = 200 }) end)
+    map("<C-d>", function() neoscroll.ctrl_d({ duration = 200 }) end)
+    map("<C-b>", function() neoscroll.ctrl_b({ duration = 400 }) end)
+    map("<C-f>", function() neoscroll.ctrl_f({ duration = 400 }) end)
+    map("<C-y>", function() neoscroll.scroll(-1, { move_cursor = false, duration = 120, easing = "sine" }) end)
+    map("<C-e>", function() neoscroll.scroll(1, { move_cursor = false, duration = 120, easing = "sine" }) end)
+    map("zt", function() neoscroll.zt({ half_win_duration = 250 }) end)
+    map("zz", function() neoscroll.zz({ half_win_duration = 250 }) end)
+    map("zb", function() neoscroll.zb({ half_win_duration = 250 }) end)
+
+    -- Mouse wheel: smooth animated scrolling
+    map("<ScrollWheelDown>", function()
+      neoscroll.scroll(3, { move_cursor = false, duration = 60, easing = "sine" })
+    end)
+    map("<ScrollWheelUp>", function()
+      neoscroll.scroll(-3, { move_cursor = false, duration = 60, easing = "sine" })
+    end)
+  end,
 }
