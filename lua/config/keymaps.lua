@@ -36,6 +36,12 @@ keymap.set("n", "<C-a>", "gg<S-v>G")
 keymap.set("n", "<Leader>o", "o<Esc>^Da", opts)
 keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 
+-- Scroll 1 line at a time
+keymap.set("n", "<ScrollWheelDown>", "<C-e>", opts)
+keymap.set("n", "<ScrollWheelUp>", "<C-y>", opts)
+keymap.set("v", "<ScrollWheelDown>", "<C-e>", opts)
+keymap.set("v", "<ScrollWheelUp>", "<C-y>", opts)
+
 -- Jumplist
 keymap.set("n", "<C-m>", "<C-i>", opts)
 

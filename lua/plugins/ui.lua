@@ -150,17 +150,14 @@ return {
 		"nvim-lualine/lualine.nvim",
 		opts = function(_, opts)
 			local LazyVim = require("lazyvim.util")
-			opts.sections.lualine_c[4] = {
-				LazyVim.lualine.pretty_path({
-					length = 0,
-					relative = "cwd",
-					modified_hl = "MatchParen",
-					directory_hl = "",
-					filename_hl = "Bold",
-					modified_sign = "",
-					readonly_icon = " 󰌾 ",
-				}),
-			}
+			opts.options.component_separators = { left = "", right = "" }
+			opts.options.section_separators = { left = "", right = "" }
+			opts.sections.lualine_a = { "mode" }
+			opts.sections.lualine_b = {}
+			opts.sections.lualine_c = { { "filename", path = 1 } }
+			opts.sections.lualine_x = { "filetype", "encoding" }
+			opts.sections.lualine_y = { "progress" }
+			opts.sections.lualine_z = { "location" }
 		end,
 	},
 
@@ -181,28 +178,6 @@ return {
 		"MeanderingProgrammer/render-markdown.nvim",
 		enabled = false,
 	},
-
-  -- Smooth cursor animations - Simple and Clean
-  {
-    "sphamba/smear-cursor.nvim",
-    opts = {
-      -- Cursor color
-      cursor_color = "#c0caf5", -- Light blue for dark theme
-      -- Background color when cursor jumps
-      normal_bg = "#1a1b26", -- Dark background
-      -- Basic smear settings
-      smear_between_buffers = true,
-      smear_between_neighbor_lines = true,
-      scroll_buffer_space = true,
-      smear_insert_mode = true,
-      -- Smooth animation settings
-      stiffness = 0.6,
-      trailing_stiffness = 0.3,
-      distance_stop_animating = 0.1,
-      -- Set to `true` if your font supports legacy computing symbols
-      legacy_computing_symbols_support = false,
-    },
-  },
 
   -- Todo comments
   {
