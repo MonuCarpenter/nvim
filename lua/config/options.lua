@@ -69,3 +69,18 @@ vim.cmd("hi CursorIM guifg=#000000 guibg=#ffffff")
 vim.g.lazyvim_prettier_needs_config = true
 vim.g.lazyvim_picker = "telescope"
 vim.g.lazyvim_cmp = "blink.cmp"
+
+if vim.g.neovide then
+  vim.o.guifont = "Iosevka Comfy:h15"
+  vim.g.neovide_opacity = 1
+  vim.g.neovide_input_macos_option_key_is_meta = "both"
+  vim.g.neovide_cursor_animation_length = 0.1
+  vim.g.neovide_cursor_trail_size = 0.3
+  vim.g.neovide_cursor_antialiasing = false
+  vim.opt.linespace = 8
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.g.neovide_floating_shadow = true
+  vim.g.neovide_floating_z_height = 10
+  vim.g.neovide_light_angle_degrees = 45
+  vim.g.neovide_light_radius = 5
+end

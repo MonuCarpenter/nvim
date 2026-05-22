@@ -274,6 +274,75 @@ return {
 	},
 
 	{
+		"bassamsdata/namu.nvim",
+		opts = {
+			namu_symbols = {
+				enable = true,
+				options = {
+					display = { mode = "icon", padding = 2 },
+					row_position = "top10",
+					window = {
+						auto_size = true,
+						border = "none",
+						title_pos = "left",
+						show_footer = true,
+					},
+					icon = "󱠦",
+				},
+			},
+			workspace = {
+				enable = true,
+				options = {
+					display = { mode = "icon", padding = 2 },
+					row_position = "center",
+					window = {
+						auto_size = true,
+						border = "none",
+						title_pos = "left",
+					},
+				},
+			},
+			diagnostics = {
+				enable = true,
+				options = {
+					display = { mode = "icon", padding = 2 },
+					row_position = "center",
+					window = {
+						auto_size = true,
+						border = "none",
+					},
+				},
+			},
+			watchtower = {
+				enable = true,
+				options = {
+					display = { mode = "icon", padding = 2 },
+					window = { border = "none", auto_size = true },
+				},
+			},
+			selecta = {
+				enable = true,
+				options = {
+					window = {
+						border = "none",
+						auto_size = true,
+						title_pos = "left",
+						show_footer = true,
+					},
+					display = { mode = "icon", padding = 1 },
+				},
+			},
+		},
+		keys = {
+			{ "<leader>ns", ":Namu symbols<cr>", desc = "LSP Symbols", silent = true },
+			{ "<leader>nw", ":Namu workspace<cr>", desc = "Workspace Symbols", silent = true },
+			{ "<leader>nd", ":Namu diagnostics<cr>", desc = "Diagnostics", silent = true },
+			{ "<leader>nb", ":Namu watchtower<cr>", desc = "All Buffers Symbols", silent = true },
+			{ "<leader>nt", ":Namu treesitter<cr>", desc = "Treesitter Symbols", silent = true },
+		},
+	},
+
+	{
 		"saghen/blink.cmp",
 		opts = {
 			completion = {
