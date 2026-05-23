@@ -71,13 +71,14 @@ vim.g.lazyvim_picker = "telescope"
 vim.g.lazyvim_cmp = "blink.cmp"
 
 if vim.g.neovide then
-  vim.o.guifont = "Iosevka Comfy:h15"
+  vim.o.guifont = "JetBrains Mono:h15"
   vim.g.neovide_opacity = 1
   vim.g.neovide_input_macos_option_key_is_meta = "both"
   vim.g.neovide_cursor_animation_length = 0.1
   vim.g.neovide_cursor_trail_size = 0.3
   vim.g.neovide_cursor_antialiasing = false
-  vim.opt.linespace = 8
+  vim.opt.linespace = 0
+  vim.g.neovide_letterspace = 6
   vim.g.neovide_hide_mouse_when_typing = true
   vim.g.neovide_floating_shadow = true
   vim.g.neovide_floating_z_height = 10
