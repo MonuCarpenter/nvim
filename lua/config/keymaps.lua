@@ -36,11 +36,17 @@ keymap.set("n", "<C-a>", "gg<S-v>G")
 keymap.set("n", "<Leader>o", "o<Esc>^Da", opts)
 keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 
--- Scroll 1 line at a time
-keymap.set("n", "<ScrollWheelDown>", "<C-e>", opts)
-keymap.set("n", "<ScrollWheelUp>", "<C-y>", opts)
-keymap.set("v", "<ScrollWheelDown>", "<C-e>", opts)
-keymap.set("v", "<ScrollWheelUp>", "<C-y>", opts)
+-- Disable horizontal scroll
+keymap.set("n", "<ScrollWheelLeft>", "<Nop>", opts)
+keymap.set("n", "<ScrollWheelRight>", "<Nop>", opts)
+keymap.set("v", "<ScrollWheelLeft>", "<Nop>", opts)
+keymap.set("v", "<ScrollWheelRight>", "<Nop>", opts)
+
+-- Scroll 3 lines at a time
+keymap.set("n", "<ScrollWheelDown>", "3<C-e>", opts)
+keymap.set("n", "<ScrollWheelUp>", "3<C-y>", opts)
+keymap.set("v", "<ScrollWheelDown>", "3<C-e>", opts)
+keymap.set("v", "<ScrollWheelUp>", "3<C-y>", opts)
 
 -- Jumplist
 keymap.set("n", "<C-m>", "<C-i>", opts)
