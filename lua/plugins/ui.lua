@@ -150,10 +150,67 @@ return {
 		"nvim-lualine/lualine.nvim",
 		opts = function(_, opts)
 			local LazyVim = require("lazyvim.util")
+
+			local function branch_picker()
+				require("telescope.builtin").git_branches()
+			end
+
+			local function project_picker()
+				pcall(require("telescope").load_extension, "projects")
+				vim.cmd("Telescope projects")
+			end
+
+			local function finder_open()
+				local folder = vim.fn.system(
+					"osascript -e 'tell application \"Finder\" to set folderPath to POSIX path of (choose folder)' 2>/dev/null"
+				)
+				if vim.v.shell_error ~= 0 then
+					return
+				end
+				folder = vim.fn.trim(folder)
+				if folder ~= "" then
+					vim.api.nvim_set_current_dir(folder)
+					vim.cmd("e .")
+				end
+			end
+
 			opts.options.component_separators = { left = "", right = "" }
 			opts.options.section_separators = { left = "", right = "" }
 			opts.sections.lualine_a = { "mode" }
-			opts.sections.lualine_b = {}
+			opts.sections.lualine_b = {
+				{
+					"branch",
+					on_click = branch_picker,
+				},
+				{
+					function()
+						local ok, project = pcall(require("project_nvim").get_current_project_name)
+						if ok and project then
+							return " " .. project
+						end
+						return " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+					end,
+					on_click = function()
+						vim.ui.select({
+							{ text = "Recent Projects", action = "projects" },
+							{ text = "Open from Finder", action = "finder" },
+						}, {
+							prompt = "Switch Project",
+							format_item = function(item)
+								return item.text
+							end,
+						}, function(choice)
+							if choice then
+								if choice.action == "projects" then
+									project_picker()
+								else
+									finder_open()
+								end
+							end
+						end)
+					end,
+				},
+			}
 			opts.sections.lualine_c = { { "filename", path = 1 } }
 			opts.sections.lualine_x = { "filetype", "encoding" }
 			opts.sections.lualine_y = { "progress" }
