@@ -37,7 +37,16 @@ return {
       require("toggleterm").setup({
         direction = "float",
         open_mapping = [[<c-->]],
-        float_opts = { border = "curved" },
+        float_opts = {
+          border = "curved",
+          width = function()
+            return math.floor(vim.o.columns * 0.96)
+          end,
+          height = function()
+            return math.floor(vim.o.lines * 0.96)
+          end,
+          winblend = 10,
+        },
         insert_mappings = true,
         terminal_mappings = true,
       })
