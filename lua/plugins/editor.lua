@@ -201,7 +201,7 @@ return {
 					n = {},
 				},
 			})
-			opts.pickers = {
+			opts.pickers = vim.tbl_deep_extend("force", opts.pickers or {}, {
 				diagnostics = {
 					theme = "ivy",
 					initial_mode = "normal",
@@ -209,7 +209,7 @@ return {
 						preview_cutoff = 9999,
 					},
 				},
-			}
+			})
 			opts.extensions = {
 				file_browser = {
 					theme = "dropdown",
