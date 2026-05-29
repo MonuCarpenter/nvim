@@ -10,10 +10,11 @@ return {
     init = function()
       vim.g.neominimap = {
         auto_enable = true,
+        x_multiplier = 2,
         layout = "split",
         split = {
           direction = "right",
-          minimap_width = 10,
+          minimap_width = 15,
           fix_width = true,
         },
         diagnostic = {
