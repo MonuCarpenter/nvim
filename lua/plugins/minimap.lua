@@ -13,7 +13,8 @@ return {
         layout = "split",
         split = {
           direction = "right",
-          minimap_width = 20,
+          minimap_width = 10,
+          fix_width = true,
         },
         diagnostic = {
           enabled = true,
