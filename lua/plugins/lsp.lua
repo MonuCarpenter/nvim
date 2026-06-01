@@ -10,7 +10,7 @@ return {
 				"shellcheck",
 				"shfmt",
 				"tailwindcss-language-server",
-				"typescript-language-server",
+				"vtsls",
 				"css-lsp",
 				"rust-analyzer",
 				"clangd", -- C++ LSP
@@ -43,59 +43,15 @@ return {
 						return require("lspconfig.util").root_pattern(".git")(...)
 					end,
 				},
-				tsserver = {
-				-- Increase Node memory for tsserver to avoid OOM crashes
-				on_new_config = function(new_config)
-					new_config.cmd_env = new_config.cmd_env or {}
-					new_config.cmd_env.NODE_OPTIONS = '--max-old-space-size=8192'
-				end,
-					root_dir = function(...)
-						return require("lspconfig.util").root_pattern(".git")(...)
-					end,
-					single_file_support = false,
+				vtsls = {
 					settings = {
+						vtsls = {
+							autoUseWorkspaceTsdk = false,
+						},
 						typescript = {
-							format = {
-								semicolons = "remove"
+							tsserver = {
+								maxTsServerMemory = 8192,
 							},
-							inlayHints = {
-								includeInlayParameterNameHints = "literal",
-								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHints = false,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
-							suggest = {
-								includeCompletionsForImportStatements = true,
-								includeCompletionsForModuleExports = true,
-								includeAutomaticOptionalChainCompletions = true,
-								includeCompletionsWithSnippetText = true,
-							},
-						},
-						javascript = {
-							format = {
-								semicolons = "remove"
-							},
-							inlayHints = {
-								includeInlayParameterNameHints = "all",
-								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHints = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
-							suggest = {
-								includeCompletionsForImportStatements = true,
-								includeCompletionsForModuleExports = true,
-								includeAutomaticOptionalChainCompletions = true,
-								includeCompletionsWithSnippetText = true,
-							},
-						},
-						completions = {
-							completeFunctionCalls = true,
 						},
 					},
 				},
