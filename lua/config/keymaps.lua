@@ -188,3 +188,16 @@ end
 keymap.set("n", "<leader>rs", start_rust_analyzer, { desc = "Start rust-analyzer LSP" })
 keymap.set("n", "<leader>cc", _G.start_clangd, { desc = "Start clangd LSP (C++)" })
 keymap.set("n", "<leader>go", _G.start_gopls, { desc = "Start gopls LSP (Go)" })
+
+-- Neovide font zoom
+if vim.g.neovide then
+  keymap.set("n", "<D-=>", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1
+  end, { desc = "Zoom in" })
+  keymap.set("n", "<D-->", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1
+  end, { desc = "Zoom out" })
+  keymap.set("n", "<D-0>", function()
+    vim.g.neovide_scale_factor = 1.0
+  end, { desc = "Reset zoom" })
+end
