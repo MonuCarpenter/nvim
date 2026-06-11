@@ -132,6 +132,7 @@ return {
 					},
 				},
 				rust_analyzer = {
+					single_file_support = true,
 					settings = {
 						["rust-analyzer"] = {
 							cargo = {
