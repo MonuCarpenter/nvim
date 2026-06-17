@@ -34,21 +34,30 @@ return {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = function()
+      local term_initialized = false
       require("toggleterm").setup({
         direction = "float",
         open_mapping = [[<c-->]],
         float_opts = {
-          border = "curved",
+          border = "none",
           width = function()
-            return math.floor(vim.o.columns * 0.96)
+            return vim.o.columns
           end,
           height = function()
-            return math.floor(vim.o.lines * 0.96)
+            return vim.o.lines - 1
           end,
-          winblend = 10,
+          winblend = 0,
         },
         insert_mappings = true,
         terminal_mappings = true,
+        on_open = function()
+          if not term_initialized then
+            term_initialized = true
+            vim.schedule(function()
+              vim.api.nvim_feedkeys("term\r", "n", false)
+            end)
+          end
+        end,
       })
 
       -- Terminal mode keymaps
