@@ -16,7 +16,7 @@ return {
 		config = function()
 			vim.cmd.colorscheme("xcode")
 			-- Zed-like: minimal line numbers, subtle cursorline
-			vim.opt.relativenumber = false
+			vim.opt.relativenumber = true
 			vim.opt.cursorline = true
 			-- Zed uses subtle grey selection
 			vim.api.nvim_set_hl(0, "Visual", { bg = "#d0d0d0" })
