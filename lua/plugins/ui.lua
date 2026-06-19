@@ -91,10 +91,10 @@ return {
                     gap = 1,
                     padding = 1,
                     keys = {
-                        { icon = " ", key = "f", desc = "Find File", action = ":Telescope find_files" },
-                        { icon = " ", key = "g", desc = "Find Text", action = ":Telescope live_grep" },
-                        { icon = " ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
-                        { icon = " ", key = "p", desc = "Projects", action = ":Telescope projects" },
+                        { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files()" },
+                        { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.picker.grep()" },
+                        { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.picker.recent()" },
+                        { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.picker.projects()" },
                         { icon = " ", key = "q", desc = "Quit", action = ":qa" },
                     },
                 },
@@ -108,6 +108,14 @@ return {
 			},
 			picker = {
 				sources = {
+					files = {
+						hidden = true,
+						ignored = true,
+					},
+					grep = {
+						hidden = true,
+						ignored = true,
+					},
 					explorer = {
 						hidden = true,
 						ignored = true,
@@ -126,7 +134,78 @@ return {
 				end,
 			},
 		},
-		keys = {},
+		keys = {
+			{
+				"<leader>fP",
+				function()
+					Snacks.picker.files({ cwd = require("lazy.core.config").options.root })
+				end,
+				desc = "Find Plugin File",
+			},
+			{
+				";f",
+				function()
+					Snacks.picker.files({ hidden = true, ignored = true })
+				end,
+				desc = "Find files (all)",
+			},
+			{
+				";r",
+				function()
+					Snacks.picker.grep({ hidden = true, ignored = true })
+				end,
+				desc = "Search text (all)",
+			},
+			{
+				"\\\\",
+				function()
+					Snacks.picker.buffers()
+				end,
+				desc = "Buffers",
+			},
+			{
+				";t",
+				function()
+					Snacks.picker.help()
+				end,
+				desc = "Help tags",
+			},
+			{
+				";;",
+				function()
+					Snacks.picker.resume()
+				end,
+				desc = "Resume",
+			},
+			{
+				";e",
+				function()
+					Snacks.picker.diagnostics()
+				end,
+				desc = "Diagnostics",
+			},
+			{
+				";s",
+				function()
+					Snacks.picker.treesitter()
+				end,
+				desc = "Treesitter symbols",
+			},
+			{
+				";c",
+				function()
+					Snacks.picker.lsp_incoming_calls()
+				end,
+				desc = "LSP incoming calls",
+			},
+			{
+				"sf",
+				function()
+					Snacks.explorer({ cwd = vim.fn.expand("%:p:h") })
+				end,
+				desc = "Explorer (cwd)",
+			},
+		},
 	},
 
 	-- statusline

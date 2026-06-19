@@ -67,7 +67,7 @@ vim.cmd("hi Cursor guifg=#000000 guibg=#ffffff")
 vim.cmd("hi CursorIM guifg=#000000 guibg=#ffffff")
 
 vim.g.lazyvim_prettier_needs_config = true
-vim.g.lazyvim_picker = "telescope"
+vim.g.lazyvim_picker = "snacks"
 vim.g.lazyvim_cmp = "blink.cmp"
 
 if vim.g.neovide then
