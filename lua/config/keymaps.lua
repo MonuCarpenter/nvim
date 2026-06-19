@@ -48,6 +48,10 @@ keymap.set("n", "<ScrollWheelUp>", "3<C-y>", opts)
 keymap.set("v", "<ScrollWheelDown>", "3<C-e>", opts)
 keymap.set("v", "<ScrollWheelUp>", "3<C-y>", opts)
 
+-- Save
+keymap.set("n", "<C-s>", ":w<CR>", opts)
+keymap.set("i", "<C-s>", "<Esc>:w<CR>a", opts)
+
 -- Jumplist
 keymap.set("n", "<C-m>", "<C-i>", opts)
 

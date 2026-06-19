@@ -4,6 +4,12 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	command = "set nopaste",
 })
 
+-- Save file on leaving insert mode (Esc)
+vim.api.nvim_create_autocmd("InsertLeave", {
+	pattern = "*",
+	command = "silent! write",
+})
+
 -- Disable the concealing in some file formats
 -- The default conceallevel is 3 in LazyVim
 vim.api.nvim_create_autocmd("FileType", {
