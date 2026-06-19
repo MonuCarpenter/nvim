@@ -107,6 +107,12 @@ return {
 				bo = { modified = false },
 			},
 			picker = {
+				sources = {
+					explorer = {
+						hidden = true,
+						ignored = true,
+					},
+				},
 				previewers = {
 					image = {},
 				},

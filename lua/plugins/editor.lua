@@ -99,7 +99,7 @@ return {
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.find_files({
-						no_ignore = false,
+						no_ignore = true,
 						hidden = true,
 					})
 				end,
@@ -110,7 +110,7 @@ return {
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.live_grep({
-						additional_args = { "--hidden" },
+						additional_args = { "--hidden", "--no-ignore" },
 					})
 				end,
 				desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
@@ -202,6 +202,19 @@ return {
 				},
 			})
 			opts.pickers = vim.tbl_deep_extend("force", opts.pickers or {}, {
+				find_files = {
+					find_command = function()
+						if 1 == vim.fn.executable("fd") then
+							return { "fd", "--type", "f", "--color", "never", "-E", ".git" }
+						end
+						return { "rg", "--files", "--color", "never", "-g", "!.git" }
+					end,
+					no_ignore = true,
+					hidden = true,
+				},
+				live_grep = {
+					additional_args = { "--hidden", "--no-ignore" },
+				},
 				diagnostics = {
 					theme = "ivy",
 					initial_mode = "normal",
