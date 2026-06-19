@@ -1,3 +1,5 @@
+vim.env.SNACKS_SSH = "true"
+
 return {
 	-- disable bufferline (top bar tabs)
 	{ "romgrk/bufferline.nvim", enabled = false },
