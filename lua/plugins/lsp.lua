@@ -199,8 +199,12 @@ return {
 						{
 							"gd",
 							function()
-								-- DO NOT RESUSE WINDOW
-								require("telescope.builtin").lsp_definitions({ reuse_win = false })
+								local ok, telescope = pcall(require, "telescope.builtin")
+								if ok then
+									telescope.lsp_definitions({ reuse_win = false })
+								else
+									vim.lsp.buf.definition()
+								end
 							end,
 							desc = "Goto Definition",
 							has = "definition",
