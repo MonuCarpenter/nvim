@@ -138,6 +138,13 @@ return {
 		},
 		keys = {
 			{
+				"<leader><leader>",
+				function()
+					Snacks.picker.files()
+				end,
+				desc = "Find files",
+			},
+			{
 				"<leader>fP",
 				function()
 					Snacks.picker.files({ cwd = require("lazy.core.config").options.root })
@@ -147,9 +154,9 @@ return {
 			{
 				";f",
 				function()
-					Snacks.picker.files({ hidden = true, ignored = true })
+					Snacks.picker.files({ hidden = true })
 				end,
-				desc = "Find files (all)",
+				desc = "Find files (including hidden)",
 			},
 			{
 				";r",
